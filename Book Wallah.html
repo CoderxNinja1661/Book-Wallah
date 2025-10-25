@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Wallah - Your Ultimate Book Destination</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            background-color: #e74c3c;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #e74c3c;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: #2c3e50;
+        }
+
+        .btn-primary {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #c0392b;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 100px 0;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        /* Search Section */
+        .search-section {
+            background: white;
+            padding: 40px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .search-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 0 25px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .about-section h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+
+        .about-section p {
+            max-width: 800px;
+            margin: 0 auto 30px;
+            font-size: 18px;
+            color: #555;
+        }
+
+        /* Books Section */
+        .books-section {
+            padding: 60px 0;
+            background: #f8f9fa;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 40px;
+            color: #2c3e50;
+        }
+
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .book-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .book-img {
+            height: 300px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .book-details {
+            padding: 20px;
+        }
+
+        .book-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .book-author {
+            color: #777;
+            margin-bottom: 10px;
+        }
+
+        .book-price {
+            font-size: 20px;
+            font-weight: 700;
+            color: #e74c3c;
+            margin-bottom: 15px;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            padding: 10px;
+            background: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background: #1a252f;
+        }
+
+        /* Categories Section */
+        .categories-section {
+            padding: 60px 0;
+            background: white;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .category-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 30px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .category-card:hover {
+            background: #e74c3c;
+            color: white;
+            transform: translateY(-5px);
+            border-color: #e74c3c;
+        }
+
+        .category-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #777;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .form-input:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #c0392b;
+        }
+
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 40px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background: #e74c3c;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #34495e;
+            color: #bbb;
+            font-size: 14px;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .search-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-img">BW</div>
+                    <div class="logo-text">Book Wallah</div>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#books">Books</a></li>
+                        <li><a href="#categories">Categories</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="auth-buttons">
+                    <button class="btn btn-outline" id="loginBtn">Login</button>
+                    <button class="btn btn-primary" id="signupBtn">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Discover Your Next Favorite Book</h1>
+            <p>Explore our vast collection of books across all genres, from timeless classics to contemporary bestsellers.</p>
+            <button class="btn btn-primary">Browse Collection</button>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="search-section">
+        <div class="container">
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Search for books, authors, or categories...">
+                <button class="search-btn">Search</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories-section" id="categories">
+        <div class="container">
+            <h2 class="section-title">Book Categories</h2>
+            <div class="categories-grid">
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3>Fiction</h3>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <h3>Science</h3>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Education</h3>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <h3>History</h3>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Romance</h3>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-user-secret"></i>
+                    </div>
+                    <h3>Mystery</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <h2>About Our Books</h2>
+            <p>At Book Wallah, we believe in the transformative power of reading. Our carefully curated collection features books that inspire, educate, and entertain readers of all ages and interests.</p>
+            <p>From gripping fiction to insightful non-fiction, we offer a diverse range of titles to satisfy every book lover's appetite.</p>
+        </div>
+    </section>
+
+    <!-- Books Section -->
+    <section class="books-section" id="books">
+        <div class="container">
+            <h2 class="section-title">Featured Books</h2>
+            <div class="books-grid">
+                <!-- Book 1 -->
+                <div class="book-card">
+                    <img src="https://m.media-amazon.com/images/I/81bGKUa1e0L._AC_UF1000,1000_QL80_.jpg" alt="The Midnight Library" class="book-img">
+                    <div class="book-details">
+                        <h3 class="book-title">The Midnight Library</h3>
+                        <p class="book-author">by Matt Haig</p>
+                        <p class="book-price">₹499</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <!-- Book 2 -->
+                <div class="book-card">
+                    <img src="https://m.media-amazon.com/images/I/91bYsX41DVL._AC_UF1000,1000_QL80_.jpg" alt="Atomic Habits" class="book-img">
+                    <div class="book-details">
+                        <h3 class="book-title">Atomic Habits</h3>
+                        <p class="book-author">by James Clear</p>
+                        <p class="book-price">₹599</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <!-- Book 3 -->
+                <div class="book-card">
+                    <img src="https://m.media-amazon.com/images/I/71aFt4+OTOL._AC_UF1000,1000_QL80_.jpg" alt="The Alchemist" class="book-img">
+                    <div class="book-details">
+                        <h3 class="book-title">The Alchemist</h3>
+                        <p class="book-author">by Paulo Coelho</p>
+                        <p class="book-price">₹349</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <!-- Book 4 -->
+                <div class="book-card">
+                    <img src="https://m.media-amazon.com/images/I/71E0DZ7rRRL._AC_UF1000,1000_QL80_.jpg" alt="Educated" class="book-img">
+                    <div class="book-details">
+                        <h3 class="book-title">Educated</h3>
+                        <p class="book-author">by Tara Westover</p>
+                        <p class="book-price">₹649</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <!-- Book 5 -->
+                <div class="book-card">
+                    <img src="https://m.media-amazon.com/images/I/713jIoMO3UL._AC_UF1000,1000_QL80_.jpg" alt="Sapiens" class="book-img">
+                    <div class="book-details">
+                        <h3 class="book-title">Sapiens</h3>
+                        <p class="book-author">by Yuval Noah Harari</p>
+                        <p class="book-price">₹799</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <!-- Book 6 -->
+                <div class="book-card">
+                    <img src="https://m.media-amazon.com/images/I/81nP3+-cLZL._AC_UF1000,1000_QL80_.jpg" alt="The Silent Patient" class="book-img">
+                    <div class="book-details">
+                        <h3 class="book-title">The Silent Patient</h3>
+                        <p class="book-author">by Alex Michaelides</p>
+                        <p class="book-price">₹449</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Book Wallah</h3>
+                    <p>Your ultimate destination for books of all genres. Discover, read, and explore new worlds through our carefully curated collection.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#books">Books</a></li>
+                        <li><a href="#categories">Categories</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Categories</h3>
+                    <ul>
+                        <li><a href="#">Fiction</a></li>
+                        <li><a href="#">Non-Fiction</a></li>
+                        <li><a href="#">Science Fiction</a></li>
+                        <li><a href="#">Biography</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li>Email: info@bookwallah.com</li>
+                        <li>Phone: +91 9876543210</li>
+                        <li>Address: 123 Book Street, Mumbai, India</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Book Wallah. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Login</h3>
+                <button class="close-btn">&times;</button>
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label class="form-label" for="loginEmail">Email</label>
+                    <input type="email" class="form-input" id="loginEmail" placeholder="Enter your email" required>
+                    <div class="error-message" id="loginEmailError">Please enter a valid email address</div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="loginPassword">Password</label>
+                    <input type="password" class="form-input" id="loginPassword" placeholder="Enter your password" required>
+                    <div class="error-message" id="loginPasswordError">Password is required</div>
+                </div>
+                <button type="submit" class="submit-btn">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div class="modal" id="signupModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Sign Up</h3>
+                <button class="close-btn">&times;</button>
+            </div>
+            <form id="signupForm">
+                <div class="form-group">
+                    <label class="form-label" for="signupName">Full Name</label>
+                    <input type="text" class="form-input" id="signupName" placeholder="Enter your full name" required>
+                    <div class="error-message" id="signupNameError">Name is required</div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="signupEmail">Email</label>
+                    <input type="email" class="form-input" id="signupEmail" placeholder="Enter your email" required>
+                    <div class="error-message" id="signupEmailError">Please enter a valid email address</div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="signupPhone">Phone Number</label>
+                    <input type="tel" class="form-input" id="signupPhone" placeholder="Enter your 10-digit phone number" required>
+                    <div class="error-message" id="signupPhoneError">Please enter a valid 10-digit phone number</div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="signupAddress">Address</label>
+                    <textarea class="form-input" id="signupAddress" placeholder="Enter your address" rows="3" required></textarea>
+                    <div class="error-message" id="signupAddressError">Address is required</div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="signupPassword">Password</label>
+                    <input type="password" class="form-input" id="signupPassword" placeholder="Create a password" required>
+                    <div class="error-message" id="signupPasswordError">Password must be at least 6 characters</div>
+                </div>
+                <button type="submit" class="submit-btn">Sign Up</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Modal functionality
+        const loginBtn = document.getElementById('loginBtn');
+        const signupBtn = document.getElementById('signupBtn');
+        const loginModal = document.getElementById('loginModal');
+        const signupModal = document.getElementById('signupModal');
+        const closeBtns = document.querySelectorAll('.close-btn');
+        
+        // Show modals
+        loginBtn.addEventListener('click', () => {
+            loginModal.style.display = 'flex';
+        });
+        
+        signupBtn.addEventListener('click', () => {
+            signupModal.style.display = 'flex';
+        });
+        
+        // Close modals
+        closeBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                loginModal.style.display = 'none';
+                signupModal.style.display = 'none';
+            });
+        });
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === loginModal) {
+                loginModal.style.display = 'none';
+            }
+            if (e.target === signupModal) {
+                signupModal.style.display = 'none';
+            }
+        });
+        
+        // Form validation
+        const loginForm = document.getElementById('loginForm');
+        const signupForm = document.getElementById('signupForm');
+        
+        // Login form validation
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            let isValid = true;
+            
+            const email = document.getElementById('loginEmail');
+            const password = document.getElementById('loginPassword');
+            const emailError = document.getElementById('loginEmailError');
+            const passwordError = document.getElementById('loginPasswordError');
+            
+            // Reset errors
+            emailError.style.display = 'none';
+            passwordError.style.display = 'none';
+            
+            // Email validation
+            if (!email.value || !validateEmail(email.value)) {
+                emailError.style.display = 'block';
+                isValid = false;
+            }
+            
+            // Password validation
+            if (!password.value) {
+                passwordError.style.display = 'block';
+                isValid = false;
+            }
+            
+            if (isValid) {
+                alert('Login successful!');
+                loginModal.style.display = 'none';
+                loginForm.reset();
+            }
+        });
+        
+        // Signup form validation
+        signupForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            let isValid = true;
+            
+            const name = document.getElementById('signupName');
+            const email = document.getElementById('signupEmail');
+            const phone = document.getElementById('signupPhone');
+            const address = document.getElementById('signupAddress');
+            const password = document.getElementById('signupPassword');
+            
+            const nameError = document.getElementById('signupNameError');
+            const emailError = document.getElementById('signupEmailError');
+            const phoneError = document.getElementById('signupPhoneError');
+            const addressError = document.getElementById('signupAddressError');
+            const passwordError = document.getElementById('signupPasswordError');
+            
+            // Reset errors
+            nameError.style.display = 'none';
+            emailError.style.display = 'none';
+            phoneError.style.display = 'none';
+            addressError.style.display = 'none';
+            passwordError.style.display = 'none';
+            
+            // Name validation
+            if (!name.value) {
+                nameError.style.display = 'block';
+                isValid = false;
+            }
+            
+            // Email validation
+            if (!email.value || !validateEmail(email.value)) {
+                emailError.style.display = 'block';
+                isValid = false;
+            }
+            
+            // Phone validation
+            if (!phone.value || !validatePhone(phone.value)) {
+                phoneError.style.display = 'block';
+                isValid = false;
+            }
+            
+            // Address validation
+            if (!address.value) {
+                addressError.style.display = 'block';
+                isValid = false;
+            }
+            
+            // Password validation
+            if (!password.value || password.value.length < 6) {
+                passwordError.style.display = 'block';
+                isValid = false;
+            }
+            
+            if (isValid) {
+                alert('Sign up successful! Welcome to Book Wallah.');
+                signupModal.style.display = 'none';
+                signupForm.reset();
+            }
+        });
+        
+        // Helper functions for validation
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+        
+        function validatePhone(phone) {
+            const re = /^\d{10}$/;
+            return re.test(phone);
+        }
+        
+        // Add to cart functionality
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const bookTitle = button.parentElement.querySelector('.book-title').textContent;
+                alert(`"${bookTitle}" has been added to your cart!`);
+            });
+        });
+        
+        // Category selection
+        const categoryCards = document.querySelectorAll('.category-card');
+        categoryCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const category = card.querySelector('h3').textContent;
+                alert(`Showing books in ${category} category`);
+            });
+        });
+    </script>
+</body>
+</html>
